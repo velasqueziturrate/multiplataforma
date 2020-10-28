@@ -1,0 +1,34 @@
+<ActionBar>
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Settings Uder Edit"></Label>
+</ActionBar>
+
+<StackLayout class="page__content">
+    <Label class="page__content-icon fas" text="&#xf013;"></Label>
+    <GridLayout rows="*, *, *" columns="*, *">
+        <TextField row="0" colSpan="2" hint="Nuevo usuario" #user="ngModel" [(ngModel)]="nombreUsuario" minlength="6"
+            required>
+        </TextField>
+        <Label row="1" col="0" *ngIf="user.hasError('required')" text="*"></Label>
+        <Label row="1" col="1" *ngIf="!user.hasError('required') && user.hasError('minlength')" text="min 6+"></Label>
+        <Button row="2" colSpan="2" text="Confirmar" *ngIf="user.valid" (tap)="userActionEdit(user.value)"></Button>
+    </GridLayout>
+</StackLayout>
+
+<!-- <FlexboxLayout flexDirection="row">
+    <TextField #control="ngModel" [(ngModel)]="textFieldValue" hint="Ingresar texto..." minlen="4" required></TextField>
+    <Label *ngIf="control.hasError('required')" text="*"></Label>
+    <Label *ngIf="!control.hasError('required') && control.hasError('minlen')" text="4+"></Label>
+</FlexboxLayout>
+<Button text="Buscar!" (tap)="onButtonTap()" *ngIf="control.valid"></Button> -->

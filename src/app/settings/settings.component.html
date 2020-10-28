@@ -1,0 +1,26 @@
+<ActionBar>
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Settings"></Label>
+</ActionBar>
+
+<StackLayout class="page__content">
+    <Label class="page__content-icon fas" text="&#xf013;"></Label>
+    <GridLayout rows="*, *" columns="*, *">
+        <Button row="0" colSpan="2" *ngIf="this.nombreUsuario === null || this.nombreUsuario === undefined" text="Agregar usuario" (tap)="userActionAdd()"></Button>
+        <Label row="0" colSpan="2" *ngIf="this.nombreUsuario !== null && this.nombreUsuario !== undefined" [text]="'Usuario: ' + this.nombreUsuario"
+        horizontalAlignment="center"></Label>
+        <Button row="1" col="0" *ngIf="this.nombreUsuario !== null && this.nombreUsuario !== undefined" text="Eliminar usuario" (tap)="userActionDel()"></Button>
+        <Button row="1" col="1" *ngIf="this.nombreUsuario !== null && this.nombreUsuario !== undefined" text="Editar usuario" (tap)="onNavItemTap(this.nombreUsuario)"></Button>
+    </GridLayout>
+</StackLayout>

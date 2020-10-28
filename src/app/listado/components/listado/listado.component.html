@@ -1,0 +1,33 @@
+<ActionBar [ngStyle]="plataforma ? {'backgroundColor': 'rgba(0, 0, 0, 0.7)', 'color': 'white'} : {'color': 'black'}">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Listado"></Label>
+</ActionBar>
+
+<StackLayout class="page__content">
+    <Label class="page__content-icon fas" text="&#xf03a;"></Label>
+    <Button text="Agregar/Eliminar producto" (tap)="newProduct($event)"></Button>
+
+    <PullToRefresh (refresh)="onPull($event)">
+        <ListView class="list-group" [items]="this.resultados" style="height: 1250px" id="lista">
+            <ng-template let-x="item">
+                <FlexboxLayout flexDirection="row" class="list-group-item" (tap)="onNavItemTap(x)">
+                    <Image [src]=imagesource class="thumb img-circle"></Image>
+                    <Label [text]="x" class="list-group-item-heading" verticalAlignment="center"
+                        style="width: 60%"></Label>
+                </FlexboxLayout>
+            </ng-template>
+        </ListView>
+    </PullToRefresh>
+
+</StackLayout>

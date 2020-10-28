@@ -1,0 +1,31 @@
+<ActionBar [ngStyle]="plataforma ? {'backgroundColor': 'rgba(0, 0, 0, 0.7)', 'color': 'white'} : {'color': 'black'}">
+    <!-- 
+    Use the NavigationButton as a side-drawer button in Android
+    because ActionItems are shown on the right side of the ActionBar
+    -->
+    <NavigationButton ios:visibility="collapsed" icon="res://menu" (tap)="onDrawerButtonTap()"></NavigationButton>
+    <!-- 
+    Use the ActionItem for IOS with position set to left. Using the
+    NavigationButton as a side-drawer button in iOS is not possible,
+    because its function is to always navigate back in the application.
+    -->
+    <ActionItem icon="res://menu" android:visibility="collapsed" (tap)="onDrawerButtonTap()" ios.position="left">
+    </ActionItem>
+    <Label text="Detalle"></Label>
+</ActionBar>
+
+<StackLayout class="page__content" #product>
+    <Label class="page__content-icon fas" text="&#xf03a;"></Label>
+
+    <GridLayout rows="auto, 50, 50" columns="auto, auto, *" verticalAlignment="top" backgroundColor="lightgray" (tap)="animarAhora()">
+
+        <Image src="res://icon" rowSpan="3" col="1" width="72" height="72" margin="3" verticalAlignment="top"></Image>
+        <Label [text]=detail$ col="2" row="1" minHeight="50" fontSize="20" margin="3" verticalAlignment="top"></Label>
+        <Label class="nt-icon fas" text="&#xf164;" color="green" col="2" row="2" fontSize="20" horizontalAlignment="left" margin="3"></Label>
+        <Label class="nt-icon fas" text="&#xf165;" color="red" col="3" row="2" fontSize="20" horizontalAlignment="right" margin="3"></Label>
+        <Label text="Usuario: Luillin Escobar" col="2" row="3" fontSize="14" horizontalAlignment="left" verticalAlignment="bottom" margin="3"></Label>
+        <Label text="Puntaje: 4.3" col="3" row="3" color="#10c2b0" fontSize="14" horizontalAlignment="right" verticalAlignment="bottom" margin="3"></Label>
+
+    </GridLayout>
+
+</StackLayout>
